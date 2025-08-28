@@ -1,0 +1,31 @@
+bbody {
+  font-family: sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 2rem;
+}
+
+.app {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

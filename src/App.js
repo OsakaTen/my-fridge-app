@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import AddItemForm from "./components/AddItemForm";
+import ItemList from "./components/ItemList";
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  // 起動時に localStorage から復元
+  useEffect(() => {
+    const saved = localStorage.getItem("items");
+    if (saved) setItems(JSON.parse(saved));
+  }, []);
+
+  // items が変わるたびに保存
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+
+  const addItem = (name) => {
+    setItems([...items, { id: Date.now(), name }]);
+  };
+
+  const deleteItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>🍎 My Fridge</h1>
+      <AddItemForm onAdd={addItem} />
+      <ItemList items={items} onDelete={deleteItem} />
     </div>
   );
 }
